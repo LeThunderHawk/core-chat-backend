@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.scrollable {
+  scrollbar-color: rgb(107 114 128) rgb(53, 57, 65);
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
