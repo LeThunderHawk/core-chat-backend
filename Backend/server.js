@@ -6,7 +6,8 @@ const md5 = require('md5')
 const app = express()
 app.use(cors())
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
+    connectionLimit: 10,
     host: process.env.HOSTNAME,
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
@@ -30,11 +31,13 @@ app.get('/login', (req, res) => {
 
 app.get('/users', (req, res) =>{
     const sql = 'SELECT fname, lname, public_id, status FROM `users`';
-    db.query(sql, (err, data)=>{
-        if(err) return res.json(err);
-        console.log(sql)
-        return res.json(data);
-
+    db.getConnection(function(err, connection) {
+        connection.query(sql, (err, data) => {
+            if(err) return res.json(err);
+            if(data[0]) return res.json(data) 
+            else return res.json("nothing")
+            
+    })
     })
 })
 app.get('/delete', (req, res) =>{
