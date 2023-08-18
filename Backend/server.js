@@ -2,15 +2,16 @@ const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
 const md5 = require('md5')
+require('dotenv').config();
 
 const app = express()
 app.use(cors())
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: 'root',
-    password: '',
-    database: 'chatapp'
+    host: process.env.HOSTNAME,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 })
 
 app.get('/', (req, res) => {
