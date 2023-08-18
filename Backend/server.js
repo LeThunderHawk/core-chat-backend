@@ -19,6 +19,22 @@ app.get('/', (req, res) => {
     
 })
 
+app.get('/createtable', (req, res) => {
+const sql = 'CREATE TABLE users(INT msg_id, INT from, INT to, STRING msg)';
+db.getconnection(function(err,connection){
+if(err){
+connection.release();
+}
+connection.query(sql, function(err2, rows, fields){
+if(err2){
+
+}else{
+data = 'worked'
+res.json(data)}
+connection.release();
+});
+});
+});
 app.get('/login', (req, res) => {
     const sql = 'SELECT fname,lname,email,public_id from `users` WHERE (fname="' + req.query.fname + '" AND lname="' + req.query.lname + '" AND password="' + req.query.password + '")';
     db.query(sql, (err, data) => {
