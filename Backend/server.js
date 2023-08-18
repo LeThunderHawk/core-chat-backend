@@ -2,7 +2,6 @@ const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
 const md5 = require('md5')
-require('dotenv').config();
 
 const app = express()
 app.use(cors())
