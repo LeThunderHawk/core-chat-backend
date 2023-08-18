@@ -32,11 +32,17 @@ app.get('/login', (req, res) => {
 app.get('/users', (req, res) =>{
     const sql = 'SELECT fname, lname, public_id, status FROM `users`';
     db.getConnection(function(err, connection) {
+
+if (err) {
+			connection.release();
+	  		console.log(' Error getting mysql_pool connection: ' + err);
+	  		throw err;
+	  	}
         connection.query(sql, (err, data) => {
             if(err) return res.json(err);
             if(data[0]) return res.json(data) 
             else return res.json("nothing")
-            
+            connection.release();
     })
     })
 })
