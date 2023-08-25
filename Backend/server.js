@@ -6,13 +6,13 @@ const md5 = require('md5')
 const app = express()
 app.use(cors())
 
-const db = mysql.createPool({
+const pool = mysql.createPool({
     connectionLimit: 10,
     host: process.env.HOSTNAME,
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
-})
+});
 
 app.get('/', (req, res) => {
     return res.json('Backend API');
@@ -20,20 +20,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/createtable', (req, res) => {
-const sql = 'CREATE TABLE users(INT msg_id, INT from, INT to, STRING msg)';
-db.getconnection(function(err,connection){
-if(err){
-connection.release();
-}
-connection.query(sql, function(err2, rows, fields){
-if(err2){
 
-}else{
-data = 'worked'
-res.json(data)}
-connection.release();
-});
-});
+
 });
 app.get('/login', (req, res) => {
     const sql = 'SELECT fname,lname,email,public_id from `users` WHERE (fname="' + req.query.fname + '" AND lname="' + req.query.lname + '" AND password="' + req.query.password + '")';
