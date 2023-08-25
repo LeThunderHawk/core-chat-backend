@@ -6,7 +6,7 @@ const md5 = require('md5')
 const app = express()
 app.use(cors())
 
-const pool = mysql.createPool({
+const db = mysql.createConnection({
     connectionLimit: 10,
     host: process.env.HOSTNAME,
     user: process.env.USERNAME,
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.get('/createtable', (req, res) => {
 
-
+db.connect();
 });
 app.get('/login', (req, res) => {
     const sql = 'SELECT fname,lname,email,public_id from `users` WHERE (fname="' + req.query.fname + '" AND lname="' + req.query.lname + '" AND password="' + req.query.password + '")';
