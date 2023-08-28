@@ -4,7 +4,12 @@ const cors = require('cors')
 const md5 = require('md5')
 
 const app = express()
-app.use(cors())
+app.use(express.json())
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+);
 
 const db = mysql.createConnection({
     connectionLimit: 10,
@@ -16,7 +21,6 @@ const db = mysql.createConnection({
 
 app.get('/', (req, res) => {
     return res.json('Backend API');
-    
 })
 
 app.get('/createtable', (req, res) => {
