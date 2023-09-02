@@ -5,6 +5,7 @@ const md5 = require('md5')
 
 const app = express()
 app.use(cors())
+PORT = 4000
 
 var pool = require('./utils/database.js');
 
@@ -37,4 +38,7 @@ app.get('/', (req, res) => {
     return res.json('Backend');
     
 })
-export default app;
+
+app.listen(PORT, ()=>{
+    console.log('listening on ' + PORT);
+})
