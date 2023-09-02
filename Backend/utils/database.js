@@ -23,7 +23,7 @@ pool.getConnection((err, connection) => {
             console.error('Access Denied !')
         }
     }
-    if (connection) connection.release()
-    return
+    if (connection) connection.release();
+    return;
 })
 module.exports = pool
