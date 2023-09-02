@@ -31,7 +31,7 @@ app.get('/info', (req, res) => {
         {DBPASSWORD: process.env.DBPASSWORD},
         {DBNAME: process.env.DBNAME}
     ]
-    return res.json(envs)
+    return res.json('Not for your eyes!');
 });
 
 app.get('/', (req, res) => {
