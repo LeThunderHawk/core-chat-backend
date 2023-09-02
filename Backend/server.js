@@ -4,24 +4,36 @@ const cors = require('cors')
 const md5 = require('md5')
 
 const app = express()
-app.use(express())
+app.use(cors())
+PORT = 4000
 
-const db = mysql.createConnection({
-    connectionLimit: 10,
-    host: process.env.HOSTNAME,
-    user: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
 
-app.get('/', (req, res) => {
-    return res.json('Backend API');
+var pool = require('./utils/database.js');
+
+
+app.get('/create', function(req, res) {
+
+    pool.getConnection(function(err, connection) {
+        const sql = "SELECT * FROM chats"
+        pool.query(sql, (err, data) => {
+            if(err) return res.json(err);
+            if(data[0]) return res.json(data) 
+            else return res.json("nothing")
+        })
+
+    });
 });
 
 app.get('/info', (req, res) => {
-    return res.json(process.env.HOSTNAME);
+    return res.json(process.env.DBHOST)
 });
 
-app.get('/createtable', (req, res) => {
-    return res.json('connected');
-});
+app.get('/', (req, res) => {
+    return res.json('From Backend Side');
+    
+})
+
+
+app.listen(4000, ()=>{
+    console.log('listening on ' + PORT);
+})
