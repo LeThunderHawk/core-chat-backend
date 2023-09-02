@@ -25,7 +25,13 @@ app.get('/create', function(req, res) {
 });
 
 app.get('/info', (req, res) => {
-    return res.json("DBHOST " + process.env.DBHOST);
+    const envs = [
+        {DBHOST: process.env.DBHOST},
+        {DBUSER: process.env.DBUSER},
+        {DBPASSWORD: process.env.DBPASSWORD},
+        {DBNAME: process.env.DBNAME}
+    ]
+    return res.json(envs)
 });
 
 app.get('/', (req, res) => {
