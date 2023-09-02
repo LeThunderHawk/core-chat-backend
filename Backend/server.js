@@ -16,7 +16,11 @@ const db = mysql.createConnection({
 
 app.get('/', (req, res) => {
     return res.json('Backend API');
-})
+});
+
+app.get('/info', (req, res) => {
+    return res.json(process.env.HOSTNAME);
+});
 
 app.get('/createtable', (req, res) => {
     return res.json('connected');
