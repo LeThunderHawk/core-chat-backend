@@ -25,7 +25,7 @@ app.get('/create', function(req, res) {
 });
 
 app.get('/info', (req, res) => {
-    return res.json(process.env.DBHOST)
+    return res.json("DBHOST " + process.env.DBHOST);
 });
 
 app.get('/', (req, res) => {
