@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const app = express()
 app.use(cors())
-PORT = 4000
 
 var pool = require('./utils/database.js');
 
@@ -161,9 +160,4 @@ app.get('/getmessages', (req, res) => {
                 
     })
 });
-})
-
-
-app.listen(4000, ()=>{
-    console.log('listening on ' + PORT);
 })
