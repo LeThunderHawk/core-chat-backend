@@ -38,28 +38,3 @@ app.get('/', (req, res) => {
     
 })
 
-app.get('/login', (req, res) => {
-    const sql = 'SELECT fname,lname,email,public_id from `users` WHERE (fname="' + req.query.fname + '" AND lname="' + req.query.lname + '" AND password="' + req.query.password + '")';
-    pool.getConnection(function(err, conn) {
-        conn.query(sql, (err, data) => {
-            conn.release();
-            if(err) return res.json(err);
-            if(data[0]) return res.json(data) 
-            else return res.json("nothing")
-            
-        });
-    });
-})
-
-app.get('/users', (req, res) =>{
-    const sql = 'SELECT fname, lname, public_id, status FROM `users`';
-    pool.getConnection(function(err, conn) {
-    conn.query(sql, (err, data)=>{
-        conn.release();
-        if(err) return res.json(err);
-        console.log(sql)
-        return res.json(data);
-
-    })
-});
-})
