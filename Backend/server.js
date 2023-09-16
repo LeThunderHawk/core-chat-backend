@@ -5,6 +5,8 @@ const md5 = require('md5')
 
 const app = express()
 app.use(cors())
+PORT = 4000
+
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -130,6 +132,6 @@ app.get('/getmessages', (req, res) => {
     })
 })
 
-app.listen(8081, ()=>{
-    console.log('listening');
+app.listen(4000, ()=>{
+    console.log('listening on' + PORT);
 })
