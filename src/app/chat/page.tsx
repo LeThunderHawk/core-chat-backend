@@ -11,7 +11,7 @@ const page = () => {
   const [loggedIn, setLoggedIn] = useState(false)
   useEffect(() => {
     const cookie = getCookie("SSID");
-    if(cookie != null) setLoggedIn(true); 
+    if(cookie && cookie != "" && cookie != null) setLoggedIn(true); 
   }, [])
   return (
     <>
